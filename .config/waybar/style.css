@@ -1,0 +1,48 @@
+* {
+  font-family: "Iosevka Fixed SS09"; 
+  font-size: 16px;
+  padding: 0px;
+  background-color: #101010;
+}
+
+#battery,
+#network,
+#clock,
+#tray,
+#workspaces,
+#pulseaudio {
+
+  margin: 0px;
+  padding: 4px;
+  transition-duration: 120ms;
+}
+
+
+
+#tray menu {
+  color: #d8cab8;
+  padding: 4px;
+}
+
+#workspaces button {
+  all: initial;
+  margin-right: 0.2cm;
+}
+
+#workspaces button:hover {
+  transition-duration: 120ms;
+  color: #ba3223;
+}
+#workspaces button.focused {
+  color: #e05748;
+}
+#workspaces button.active {
+  color: #e05748;
+}
+
+#battery.warning,
+#battery.critical,
+#battery.urgent {
+  color: #1d2021;
+  background-color: #fc4649;
+}

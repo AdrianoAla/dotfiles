@@ -1,0 +1,124 @@
+# Sensible keybinds
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term kitty
+set $menu 'rofi -show drun'
+set $file_explorer nautilus
+
+# Wallpaper
+output * bg ~/Pictures/StGeorge.jpg fill
+
+bindsym $mod+q kill
+bindsym $mod+d exec $menu
+
+# Useful programs
+bindsym $mod+Return exec $term
+bindsym $mod+w exec $file_explorer
+bindsym $mod+e exec firefox
+bindsym $mod+p exec grim -g "$(slurp -d)" - | wl-copy
+
+# MOD+LEFT = MOVE, MOD+RIGHT = RESIZE
+floating_modifier $mod normal
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit?' -B 'Yes, exit sway' 'swaymsg exit'
+
+# Moving around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# Workspaces:
+set $ws1 browser
+set $ws2 nvim
+set $ws3 spotify
+set $ws4 obs
+set $ws5 discord
+set $ws6 number 6
+
+# Switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+
+#Scratchpad Stuff
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Utilities:
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+bindsym --locked XF86MonBrightnessDown exec light -U 5
+bindsym --locked XF86MonBrightnessUp exec light -A 5 
+
+bindsym Print exec grim
+
+# Status Bar:
+include /etc/sway/config.d/*
+
+bar {
+	swaybar_command waybar
+}
+
+default_border pixel 1px
+default_floating_border pixel 1px
+
+#                       border bg       text    ind     child border
+client.focused          #d8cab8 #141216 #d8cab8 #d8cab8 #d8cab8
+client.focused_inactive #AC82E9 #141216 #d8cab8 #AC82E9 #AC82E9
+client.unfocused        #AC82E9 #141216 #d8cab8 #AC82E9 #AC82E9
+client.urgent           #fcb167 #141216 #d8cab8 #fcb167 #fcb167
+client.placeholder      #AC82E9 #141216 #d8cab8 #AC82E9 #AC82E9
+
+for_window [class="miniquad-application"] floating enable
+for_window [app_id="org.gnome.Nautilus"] floating enable
+
+input type:pointer {
+     accel_profile "flat"
+     pointer_accel 0.1 # set mouse sensitivity (between -1 and 1)
+}
